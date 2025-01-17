@@ -1,29 +1,66 @@
 # WebComponent Boilerplate
 
-Este repositório fornece um boilerplate para criar WebComponents usando JavaScript. Ele inclui um exemplo de componente com um shadow DOM e estilos adotados.
+A lightweight and flexible boilerplate for creating custom Web Components using vanilla JavaScript. This project provides a structured foundation for building reusable, encapsulated components with Shadow DOM and scoped styles.
 
-## Estrutura do Projeto
-├── componet.style.js
-├── componet.js
-└── index.html
-## Mova conforme sua necessidade
-- **componet.style.js**: Contém os estilos do componente.
-- **componet.js**: Define a lógica do WebComponent.
-- **index.html**: Um exemplo de uso do componente.
+## Features
 
-## Começando
+- Shadow DOM encapsulation for isolated component styling
+- Modular architecture with separated style and logic files
+- Support for all standard Web Component lifecycle methods
+- Built-in attribute observation system
+- No external dependencies or frameworks required
 
-Siga os passos abaixo para configurar e utilizar o boilerplate.
+## Project Structure
 
-### 1. Clone o repositório
+```
+project-root/
+├── src/
+│   ├── components/
+│   │   ├── component.style.js   # Component-specific styles
+│   │   └── component.js         # Component logic and implementation
+└── index.html                   # Usage example and demo page
+```
 
+## Getting Started
+
+### Prerequisites
+
+- Modern web browser with Web Components support
+- Basic understanding of JavaScript and DOM APIs
+
+### Installation
+
+1. Clone the repository:
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/your-username/webcomponent-boilerplate.git
+cd webcomponent-boilerplate
+```
 
-import style from "./componet.style.js";
+2. Start using the boilerplate by modifying the existing files according to your needs.
 
-export default class ComponetName extends HTMLElement {
+### Usage Example
+
+1. Import your component in HTML:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebComponent Demo</title>
+    <script type="module" src="./src/components/component.js"></script>
+</head>
+<body>
+    <component-name data-attr="example"></component-name>
+</body>
+</html>
+```
+
+2. Define your component's logic:
+```javascript
+import style from "./component.style.js";
+
+export default class ComponentName extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: "open" });
@@ -31,49 +68,76 @@ export default class ComponetName extends HTMLElement {
         shadowRoot.innerHTML = "<slot></slot>";
     }
 
-    static get observedAttributes() {
-        return ["data-attr"];
-    }
-
-    connectedCallback() {
-        console.log("ComponetName added to the DOM.");
-    }
-
-    disconnectedCallback() {
-        console.log("ComponetName removed from the DOM.");
-    }
-
-    adoptedCallback() {
-        console.log("ComponetName moved to a new document.");
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        console.log(`Attribute: ${name} changed from ${oldValue} to ${newValue}`);
-    }
+    // ... other methods
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebComponent Example</title>
-    <script type="module" src="./componet.js"></script>
-</head>
-<body>
-    <componet-name data-attr="example"></componet-name>
-</body>
-</html>
+customElements.define('component-name', ComponentName);
+```
 
-Abra index.html em seu navegador para ver o WebComponent em ação.
+## Component Lifecycle Methods
 
-Métodos do Componente
-connectedCallback: Chamado quando o elemento é adicionado ao DOM.
-disconnectedCallback: Chamado quando o elemento é removido do DOM.
-adoptedCallback: Chamado quando o elemento é movido para um novo documento.
-attributeChangedCallback: Chamado quando um atributo observado é adicionado, removido ou alterado.
-Contribuições
-Sinta-se à vontade para abrir issues e pull requests para melhorias.
+The boilerplate includes all standard Web Component lifecycle methods:
 
-Licença
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+- **connectedCallback()**: Invoked when the component is added to the document's DOM
+- **disconnectedCallback()**: Called when the component is removed from the DOM
+- **adoptedCallback()**: Triggered when the component is moved to a new document
+- **attributeChangedCallback(name, oldValue, newValue)**: Executed when observed attributes change
+
+## Customization
+
+### Styling
+
+Styles are managed in `component.style.js` using Constructable Stylesheets:
+
+```javascript
+const sheet = new CSSStyleSheet();
+sheet.replaceSync(`
+    :host {
+        display: block;
+        /* Your default styles here */
+    }
+`);
+
+export default sheet;
+```
+
+### Attributes
+
+Define observed attributes in your component class:
+
+```javascript
+static get observedAttributes() {
+    return ["data-attr"];
+}
+```
+
+## Best Practices
+
+1. Always use Shadow DOM for style encapsulation
+2. Keep styles and logic in separate files for better maintainability
+3. Use meaningful component and attribute names
+4. Implement error handling for attribute changes
+5. Document your component's API and usage
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Web Components specifications and standards
+- Modern web browsers' native component support
+
+---
+
+For more information about Web Components, visit [MDN Web Components Guide](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
