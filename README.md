@@ -32,8 +32,8 @@ project-root/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/webcomponent-boilerplate.git
-cd webcomponent-boilerplate
+git clone https://github.com/igor-ifrs/web-components.git
+cd web-components
 ```
 
 2. Start using the boilerplate by modifying the existing files according to your needs.
