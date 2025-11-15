@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
 }
+
 *::after,
 *::before {
     box-sizing: border-box;
@@ -23,7 +24,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-html,
-body {
-    height: 100%;
+html {
+    height: 100dvh;
 }

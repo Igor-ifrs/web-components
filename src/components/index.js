@@ -1,3 +1,1 @@
-import ComponetName from "./component-name/component";
-
-export default ComponetName;
+export { ComponentName } from "./component-name/component.js";

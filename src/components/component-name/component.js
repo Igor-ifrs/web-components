@@ -1,34 +1,36 @@
-import style from "./componet.style.js";
-export default class ComponetName extends HTMLElement {
+import CSS from "./component.css?inline"; // ONLY VITE
+import ComponentNameTemplate from "./componentNameTemplate.js";
+
+class ComponentName extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets.push(style);
-        shadowRoot.innerHTML = "<slot></slot>";
+        const ComponentNameCSS = new CSSStyleSheet();
+        ComponentNameCSS.replaceSync(CSS);
+        shadowRoot.adoptedStyleSheets.push(ComponentNameCSS);
+        shadowRoot.appendChild(ComponentNameTemplate.content.cloneNode(true));
     }
 
-    // Definindo os atributos observados
+    // Defining the observed attributes
     static get observedAttributes() {
         return ["data-attr"];
     }
 
-    // Chamado quando o elemento é adicionado ao DOM
     connectedCallback() {
-        console.log("ComponetName added to the DOM.");
+        console.log("ComponentName added to the DOM.");
     }
 
-    // Chamado quando o elemento é removido do DOM
     disconnectedCallback() {
-        console.log("ComponetName removed from the DOM.");
+        console.log("ComponentName removed from the DOM.");
     }
 
-    // Chamado quando o elemento é movido para um novo documento
     adoptedCallback() {
-        console.log("ComponetName moved to a new document.");
+        console.log("ComponentName moved to a new document.");
     }
 
-    // Chamado quando um atributo observado é adicionado, removido ou alterado
     attributeChangedCallback(name, oldValue, newValue) {
         console.log(`Attribute: ${name} changed from ${oldValue} to ${newValue}`);
     }
 }
+customElements.define("web-component", ComponentName);
+export { ComponentName };
