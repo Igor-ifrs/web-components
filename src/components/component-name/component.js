@@ -1,12 +1,17 @@
-import CSS from "./component.css?inline"; // ONLY VITE
+/*----------------------------------------CSS CONFIG ONLY VITE----------------------------------------*/
+import CSS from "./component.css?inline";
+/** @type {CSSStyleSheet} */
+const ComponentNameCSS = new CSSStyleSheet();
+ComponentNameCSS.replaceSync(CSS);
+/*----------------------------------------END CSS CONFIG----------------------------------------------*/
+
+/** @type {HTMLTemplateElement} */
 import ComponentNameTemplate from "./componentNameTemplate.js";
 
 class ComponentName extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: "open" });
-        const ComponentNameCSS = new CSSStyleSheet();
-        ComponentNameCSS.replaceSync(CSS);
         shadowRoot.adoptedStyleSheets.push(ComponentNameCSS);
         shadowRoot.appendChild(ComponentNameTemplate.content.cloneNode(true));
     }
